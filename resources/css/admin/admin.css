@@ -1,0 +1,5 @@
+@import "tailwindcss";
+
+@source "../../views/admin/";
+
+@custom-variant dark (&:where(.dark, .dark *));
