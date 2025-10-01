@@ -56,7 +56,7 @@
                 @csrf
                 @method('DELETE')
                 <button type="submit"
-                        class="px-4 py-2 bg-red-600 hover:bg-red-700 text-white text-sm font-medium rounded shadow transition">
+                        class="px-4 py-2 bg-red-600 hover:bg-red-700 text-white text-sm font-medium rounded shadow transition hover:cursor-pointer">
                     წაშლა
                 </button>
             </form>

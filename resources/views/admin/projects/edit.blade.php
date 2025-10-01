@@ -51,9 +51,13 @@
             </div>
 
             <button type="submit"
-                    class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded shadow transition">
+                    class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded shadow transition hover:cursor-pointer">
                 შეცვლა
             </button>
+            <a href="{{ route('admin.projects.index') }}" role="button"
+               class="px-4 py-2 bg-gray-600 hover:bg-gray-700 text-white font-medium rounded shadow transition">
+                უკან სიაში
+            </a>
         </form>
     </div>
 @endsection
