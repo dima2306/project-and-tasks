@@ -13,6 +13,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\ProjectRequest;
 use App\Models\Project;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\View\View;
 
 class ProjectController extends Controller
 {
@@ -26,11 +27,19 @@ class ProjectController extends Controller
         return view('admin.projects.index', compact('projects'));
     }
 
+    public function create(): View
+    {
+        return view('admin.projects.create');
+    }
+
     public function store(ProjectRequest $request)
     {
         $this->authorize('create', Project::class);
 
-        return Project::create($request->validated());
+        $project = new Project($request->validated());
+        auth()->user()->projects()->save($project);
+
+        return back()->with('success', 'პროექტი შეიქმნა');
     }
 
     public function show(Project $project)
