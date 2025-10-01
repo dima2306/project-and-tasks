@@ -46,18 +46,18 @@
                     <td class="px-6 py-4 whitespace-nowrap text-gray-700 dark:text-gray-300">{{ $task->description }}</td>
                     <td class="px-6 py-4 whitespace-nowrap text-gray-700 dark:text-gray-300">{{ $task->completed_at }}</td>
                     <td class="px-6 py-4 whitespace-nowrap text-right">
-                        <a href="{{ route('admin.projects.show', $task->id) }}"
+                        <a href="{{ route('admin.tasks.show', $task->id) }}"
                            class="inline-block text-blue-500 hover:text-blue-700 mr-2" title="ნახვა">
                             <x-icon-eye class="size-5" />
                         </a>
                         @can('update', $task)
-                            <a href="{{ route('admin.projects.edit', $task->id) }}"
+                            <a href="{{ route('admin.tasks.edit', $task->id) }}"
                                class="inline-block text-blue-500 hover:text-blue-700 mr-2" title="რედაქტირება">
                                 <x-icon-pencil class="size-5" />
                             </a>
                         @endcan
                         @can('delete', $task)
-                            <form action="{{ route('admin.projects.destroy', $task->id) }}" method="POST"
+                            <form action="{{ route('admin.tasks.destroy', $task->id) }}" method="POST"
                                   class="inline-block" onsubmit="return confirm('დარწმუნებული ხართ რომ გსურთ წაშლა?');">
                                 @csrf
                                 @method('DELETE')
