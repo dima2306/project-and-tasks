@@ -34,6 +34,8 @@ class TaskController extends Controller
     {
         $this->authorize('create', Task::class);
 
+        Cache::tags('tasks')->flush();
+
         return Task::create($request->validated());
     }
 
@@ -50,6 +52,8 @@ class TaskController extends Controller
 
         $task->update($request->validated());
 
+        Cache::tags('tasks')->flush();
+
         return $task;
     }
 
@@ -58,6 +62,8 @@ class TaskController extends Controller
         $this->authorize('delete', $task);
 
         $task->delete();
+
+        Cache::tags('tasks')->flush();
 
         return response()->json();
     }
