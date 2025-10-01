@@ -44,7 +44,9 @@
                 <tr>
                     <td class="px-6 py-4 whitespace-nowrap text-gray-900 dark:text-gray-100">{{ $task->title }}</td>
                     <td class="px-6 py-4 whitespace-nowrap text-gray-700 dark:text-gray-300">{{ $task->description }}</td>
-                    <td class="px-6 py-4 whitespace-nowrap text-gray-700 dark:text-gray-300">{{ $task->completed_at }}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-gray-700 dark:text-gray-300">
+                        {{ $task->completed_at ? $task->completed_at->format('Y-m-d') : 'არ არის დასრულებული' }}
+                    </td>
                     <td class="px-6 py-4 whitespace-nowrap text-right">
                         <a href="{{ route('admin.tasks.show', $task->id) }}"
                            class="inline-block text-blue-500 hover:text-blue-700 mr-2" title="ნახვა">
