@@ -20,7 +20,7 @@ class ProjectController extends Controller
 {
     use AuthorizesRequests;
 
-    public function index()
+    public function index(): View
     {
         $this->authorize('viewAny', Project::class);
         $projects = Project::all();
@@ -30,10 +30,12 @@ class ProjectController extends Controller
 
     public function create(): View
     {
+        $this->authorize('create', Project::class);
+
         return view('admin.projects.create');
     }
 
-    public function store(ProjectRequest $request)
+    public function store(ProjectRequest $request): RedirectResponse
     {
         $this->authorize('create', Project::class);
 
@@ -54,7 +56,7 @@ class ProjectController extends Controller
 
     public function edit(Project $project): View
     {
-        $this->authorize('view', $project);
+        $this->authorize('update', $project);
 
         return view('admin.projects.edit', compact('project'));
     }
