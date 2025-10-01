@@ -45,7 +45,7 @@
                             <x-icon-pencil class="h-5 w-5" />
                         </a>
                         <form action="{{ route('admin.projects.destroy', $project->id) }}" method="POST"
-                              class="inline-block" onsubmit="return confirm('Delete this project?');">
+                              class="inline-block" onsubmit="return confirm('დარწმუნებული ხართ რომ გსურთ წაშლა?');">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="text-red-500 hover:text-red-700 hover:cursor-pointer"

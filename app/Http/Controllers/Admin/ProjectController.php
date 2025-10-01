@@ -13,6 +13,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\ProjectRequest;
 use App\Models\Project;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 
 class ProjectController extends Controller
@@ -58,12 +59,12 @@ class ProjectController extends Controller
         return $project;
     }
 
-    public function destroy(Project $project)
+    public function destroy(Project $project): RedirectResponse
     {
         $this->authorize('delete', $project);
 
         $project->delete();
 
-        return response()->json();
+        return back()->with('success', 'პროექტი წაიშალა');
     }
 }
