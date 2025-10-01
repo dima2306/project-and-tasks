@@ -11,7 +11,7 @@
            class="block px-3 py-2 rounded-md text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">
             პროექტები
         </a>
-        <a href="#"
+        <a href="{{ route('admin.tasks.index') }}"
            class="block px-3 py-2 rounded-md text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">
             დავალებები
         </a>
