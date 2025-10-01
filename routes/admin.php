@@ -6,6 +6,7 @@
  * Time: 21:55
  */
 
+use App\Http\Controllers\Admin\ProjectController;
 use App\Http\Middleware\AdminAreaMiddleware;
 
 Route::middleware([AdminAreaMiddleware::class])
@@ -15,5 +16,7 @@ Route::middleware([AdminAreaMiddleware::class])
         Route::get('/', function () {
             return view('admin.dashboard');
         })->name('dashboard');
+
+        Route::resource('projects', ProjectController::class);
     });
 

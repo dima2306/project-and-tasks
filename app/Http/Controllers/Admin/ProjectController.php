@@ -7,8 +7,9 @@
  * Time: 00:34
  */
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\ProjectRequest;
 use App\Models\Project;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
@@ -20,8 +21,9 @@ class ProjectController extends Controller
     public function index()
     {
         $this->authorize('viewAny', Project::class);
+        $projects = Project::all();
 
-        return Project::all();
+        return view('admin.projects.index', compact('projects'));
     }
 
     public function store(ProjectRequest $request)
