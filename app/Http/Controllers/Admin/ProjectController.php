@@ -12,6 +12,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProjectRequest;
 use App\Models\Project;
+use Cache;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
@@ -22,8 +23,11 @@ class ProjectController extends Controller
 
     public function index(): View
     {
+        $projects = Cache::tags('projects')->remember('projects.listing', 600, function () {
+            return Project::all();
+        });
+
         $this->authorize('viewAny', Project::class);
-        $projects = Project::all();
 
         return view('admin.projects.index', compact('projects'));
     }
@@ -41,6 +45,8 @@ class ProjectController extends Controller
 
         $project = new Project($request->validated());
         auth()->user()->projects()->save($project);
+
+        Cache::tags('projects')->flush();
 
         return back()->with('success', 'პროექტი შეიქმნა');
     }
@@ -67,6 +73,8 @@ class ProjectController extends Controller
 
         $project->update($request->validated());
 
+        Cache::tags('projects')->flush();
+
         return back()->with('success', 'პროექტი განახლდა');
     }
 
@@ -75,6 +83,8 @@ class ProjectController extends Controller
         $this->authorize('delete', $project);
 
         $project->delete();
+
+        Cache::tags('projects')->flush();
 
         return back()->with('success', 'პროექტი წაიშალა');
     }
