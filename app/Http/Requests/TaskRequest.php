@@ -25,7 +25,7 @@ class TaskRequest extends FormRequest
 
     public function authorize(): bool
     {
-        return true;
+        return $this->user()->hasRole('admin');
     }
 
     public function messages(): array
