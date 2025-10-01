@@ -48,8 +48,9 @@
                               class="inline-block" onsubmit="return confirm('Delete this project?');">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="text-red-500 hover:text-red-700" title="წაშლა">
-                                <x-icon-cross class="h-5 w-5" />
+                            <button type="submit" class="text-red-500 hover:text-red-700 hover:cursor-pointer"
+                                    title="წაშლა">
+                                <x-icon-trash class="h-5 w-5" />
                             </button>
                         </form>
                     </td>
