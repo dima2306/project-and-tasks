@@ -23,11 +23,11 @@ class ProjectController extends Controller
 
     public function index(): View
     {
+        $this->authorize('viewAny', Project::class);
+
         $projects = Cache::tags('projects')->remember('projects.listing', 600, function () {
             return Project::all();
         });
-
-        $this->authorize('viewAny', Project::class);
 
         return view('admin.projects.index', compact('projects'));
     }
