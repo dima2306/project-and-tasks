@@ -50,13 +50,20 @@ class ProjectController extends Controller
         return $project;
     }
 
-    public function update(ProjectRequest $request, Project $project)
+    public function edit(Project $project): View
+    {
+        $this->authorize('view', $project);
+
+        return view('admin.projects.edit', compact('project'));
+    }
+
+    public function update(ProjectRequest $request, Project $project): RedirectResponse
     {
         $this->authorize('update', $project);
 
         $project->update($request->validated());
 
-        return $project;
+        return back()->with('success', 'პროექტი განახლდა');
     }
 
     public function destroy(Project $project): RedirectResponse
