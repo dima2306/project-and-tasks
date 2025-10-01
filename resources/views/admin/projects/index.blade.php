@@ -40,6 +40,10 @@
                     <td class="px-6 py-4 whitespace-nowrap text-gray-900 dark:text-gray-100">{{ $project->name }}</td>
                     <td class="px-6 py-4 whitespace-nowrap text-gray-700 dark:text-gray-300">{{ $project->description }}</td>
                     <td class="px-6 py-4 whitespace-nowrap text-right">
+                        <a href="{{ route('admin.projects.show', $project->id) }}"
+                           class="inline-block text-blue-500 hover:text-blue-700 mr-2" title="ნახვა">
+                            <x-icon-eye class="size-5" />
+                        </a>
                         <a href="{{ route('admin.projects.edit', $project->id) }}"
                            class="inline-block text-blue-500 hover:text-blue-700 mr-2" title="რედაქტირება">
                             <x-icon-pencil class="h-5 w-5" />
