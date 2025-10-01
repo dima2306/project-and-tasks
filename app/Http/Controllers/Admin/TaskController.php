@@ -11,9 +11,11 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\TaskRequest;
+use App\Models\Project;
 use App\Models\Task;
 use Cache;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Http\RedirectResponse;
 
 class TaskController extends Controller
 {
@@ -30,13 +32,26 @@ class TaskController extends Controller
         return view('admin.tasks.index', compact('tasks'));
     }
 
-    public function store(TaskRequest $request)
+    public function create()
+    {
+        $data['projects'] = Project::all();
+        $data['statuses'] = [
+            'todo' => 'გასაკეთებელია',
+            'in_progress' => 'მიმდინარეობს',
+        ];
+
+        return view('admin.tasks.create', $data);
+    }
+
+    public function store(TaskRequest $request): RedirectResponse
     {
         $this->authorize('create', Task::class);
 
+        Task::create($request->validated());
+
         Cache::tags('tasks')->flush();
 
-        return Task::create($request->validated());
+        return back()->with('success', 'დავალება შეიქმნა');
     }
 
     public function show(Task $task)
@@ -54,7 +69,7 @@ class TaskController extends Controller
 
         Cache::tags('tasks')->flush();
 
-        return $task;
+        return back()->with('success', 'დავალება განახლდა');
     }
 
     public function destroy(Task $task)
@@ -65,6 +80,6 @@ class TaskController extends Controller
 
         Cache::tags('tasks')->flush();
 
-        return response()->json();
+        return back()->with('success', 'დავალება წაიშალა');
     }
 }
