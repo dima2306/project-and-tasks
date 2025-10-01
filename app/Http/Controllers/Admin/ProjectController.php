@@ -43,11 +43,13 @@ class ProjectController extends Controller
         return back()->with('success', 'პროექტი შეიქმნა');
     }
 
-    public function show(Project $project)
+    public function show(Project $project): View
     {
         $this->authorize('view', $project);
 
-        return $project;
+        $project->load('tasks');
+
+        return view('admin.projects.show', compact('project'));
     }
 
     public function edit(Project $project): View
