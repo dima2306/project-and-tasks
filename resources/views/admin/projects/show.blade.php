@@ -47,10 +47,13 @@
         </div>
 
         <div class="flex space-x-4">
+            @can('update', $project)
             <a href="{{ route('admin.projects.edit', $project->id) }}"
                class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium rounded shadow transition">
                 რედაქტირება
             </a>
+            @endcan
+            @can('delete', $project)
             <form action="{{ route('admin.projects.destroy', $project->id) }}" method="POST"
                   onsubmit="return confirm('დარწმუნებული ხართ რომ გსურთ წაშლა?');">
                 @csrf
@@ -60,6 +63,7 @@
                     წაშლა
                 </button>
             </form>
+            @endcan
             <a href="{{ route('admin.projects.index') }}"
                class="px-4 py-2 bg-gray-600 hover:bg-gray-700 text-white text-sm font-medium rounded shadow transition">
                 უკან სიაში

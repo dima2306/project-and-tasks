@@ -41,10 +41,12 @@
                 <label for="is_active" class="text-gray-700 dark:text-gray-300">აქტიური</label>
             </div>
 
+            @can('create', \App\Models\Project::class)
             <button type="submit"
                     class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded shadow transition hover:cursor-pointer">
                 შექმნა
             </button>
+            @endcan
             <a href="{{ route('admin.projects.index') }}" role="button"
                class="px-4 py-2 bg-gray-600 hover:bg-gray-700 text-white font-medium rounded shadow transition">
                 უკან სიაში

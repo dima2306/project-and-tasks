@@ -12,6 +12,7 @@
         </div>
     @endif
 
+    @can('create', \App\Models\Project::class)
     <div class="p-2 max-w-fit">
         <a href="{{ route('admin.projects.create') }}" title="ახალი პროექტი"
            class="inline-flex px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium rounded shadow transition">
@@ -19,6 +20,7 @@
             ახალი პროექტი
         </a>
     </div>
+    @endcan
     <div class="p-2">
         <table class="min-w-full divide-y divide-gray-200">
             <thead class="bg-gray-50 dark:bg-gray-800">
@@ -44,10 +46,13 @@
                            class="inline-block text-blue-500 hover:text-blue-700 mr-2" title="ნახვა">
                             <x-icon-eye class="size-5" />
                         </a>
+                        @can('update', $project)
                         <a href="{{ route('admin.projects.edit', $project->id) }}"
                            class="inline-block text-blue-500 hover:text-blue-700 mr-2" title="რედაქტირება">
                             <x-icon-pencil class="size-5" />
                         </a>
+                        @endcan
+                        @can('delete', $project)
                         <form action="{{ route('admin.projects.destroy', $project->id) }}" method="POST"
                               class="inline-block" onsubmit="return confirm('დარწმუნებული ხართ რომ გსურთ წაშლა?');">
                             @csrf
@@ -57,6 +62,7 @@
                                 <x-icon-trash class="size-5" />
                             </button>
                         </form>
+                        @endcan
                     </td>
                 </tr>
             @empty
