@@ -46,7 +46,7 @@
                         </a>
                         <a href="{{ route('admin.projects.edit', $project->id) }}"
                            class="inline-block text-blue-500 hover:text-blue-700 mr-2" title="რედაქტირება">
-                            <x-icon-pencil class="h-5 w-5" />
+                            <x-icon-pencil class="size-5" />
                         </a>
                         <form action="{{ route('admin.projects.destroy', $project->id) }}" method="POST"
                               class="inline-block" onsubmit="return confirm('დარწმუნებული ხართ რომ გსურთ წაშლა?');">
@@ -54,7 +54,7 @@
                             @method('DELETE')
                             <button type="submit" class="text-red-500 hover:text-red-700 hover:cursor-pointer"
                                     title="წაშლა">
-                                <x-icon-trash class="h-5 w-5" />
+                                <x-icon-trash class="size-5" />
                             </button>
                         </form>
                     </td>
