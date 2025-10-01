@@ -25,6 +25,13 @@ class Project extends Model
         'is_active',
     ];
 
+    protected function casts(): array
+    {
+        return [
+            'is_active' => 'boolean',
+        ];
+    }
+
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
@@ -33,12 +40,5 @@ class Project extends Model
     public function tasks(): HasMany
     {
         return $this->hasMany(Task::class);
-    }
-
-    protected function casts(): array
-    {
-        return [
-            'is_active' => 'boolean',
-        ];
     }
 }
