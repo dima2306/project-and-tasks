@@ -19,29 +19,26 @@ class ProjectPolicy
 
     public function viewAny(User $user): bool
     {
+        return $user->can('view projects');
     }
 
     public function view(User $user, Project $project): bool
     {
+        return $user->id === $project->user_id || $user->hasRole('admin');
     }
 
     public function create(User $user): bool
     {
+        return $user->hasRole('admin');
     }
 
     public function update(User $user, Project $project): bool
     {
+        return $user->id === $project->user_id;
     }
 
     public function delete(User $user, Project $project): bool
     {
-    }
-
-    public function restore(User $user, Project $project): bool
-    {
-    }
-
-    public function forceDelete(User $user, Project $project): bool
-    {
+        return $user->id === $project->user_id;
     }
 }
