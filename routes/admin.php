@@ -6,6 +6,14 @@
  * Time: 21:55
  */
 
-Route::get('admin', function () {
-    return view('admin.dashboard');
-})->name('admin.dashboard');
+use App\Http\Middleware\AdminAreaMiddleware;
+
+Route::middleware([AdminAreaMiddleware::class])
+    ->prefix('admin')
+    ->name('admin.')
+    ->group(function () {
+        Route::get('/', function () {
+            return view('admin.dashboard');
+        })->name('dashboard');
+    });
+
