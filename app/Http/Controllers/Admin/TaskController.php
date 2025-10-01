@@ -7,10 +7,12 @@
  * Time: 00:40
  */
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\TaskRequest;
 use App\Models\Task;
+use Cache;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 class TaskController extends Controller
@@ -21,7 +23,11 @@ class TaskController extends Controller
     {
         $this->authorize('viewAny', Task::class);
 
-        return Task::all();
+        $tasks = Cache::tags('tasks')->remember('tasks.listing', 600, function () {
+            return Task::all();
+        });
+
+        return view('admin.tasks.index', compact('tasks'));
     }
 
     public function store(TaskRequest $request)
