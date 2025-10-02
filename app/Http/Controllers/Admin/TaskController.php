@@ -61,7 +61,9 @@ class TaskController extends Controller
     {
         $this->authorize('view', $task);
 
-        return view('admin.tasks.show', compact('task'));
+        $taskStatuses = [...self::TASK_STATUSES, 'completed' => 'დასრულებულია'];
+
+        return view('admin.tasks.show', compact('task', 'taskStatuses'));
     }
 
     public function edit(Task $task): View

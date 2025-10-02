@@ -3,7 +3,6 @@
 @section('content')
     <div class="container mx-auto px-4 py-6">
         <div class="bg-white shadow-lg rounded-lg overflow-hidden">
-            <!-- Header -->
             <div class="bg-gray-50 px-6 py-4 border-b">
                 <div class="flex justify-between items-center">
                     <h1 class="text-2xl font-bold text-gray-800">დავალების დეტალები</h1>
@@ -57,9 +56,11 @@
                                         bg-blue-100 text-blue-800
                                     @elseif($task->status === 'completed')
                                         bg-green-100 text-green-800
+                                    @else
+                                        bg-gray-100 text-gray-800
                                     @endif">
                                     {{-- Here we are using table-lookup for fast array scan and  better readability --}}
-                                    {{ \App\Http\Controllers\Admin\TaskController::TASK_STATUSES[$task->status] ?? 'უცნობი' }}
+                                    {{ $taskStatuses[$task->status] ?? 'უცნობი' }}
                                 </span>
                             </div>
 
