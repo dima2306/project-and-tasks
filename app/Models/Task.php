@@ -4,7 +4,7 @@
  * Created by PhpStorm.
  * User: dima23
  * Date: 30.09.25
- * Time: 00:40
+ * Time: 00:40.
  */
 
 namespace App\Models;

@@ -1,9 +1,10 @@
 <?php
+
 /**
  * Created by PhpStorm.
  * User: dima23
  * Date: 02.10.25
- * Time: 15:30
+ * Time: 15:30.
  */
 
 namespace App\Console\Commands;

@@ -1,9 +1,10 @@
 <?php
+
 /**
  * Created by PhpStorm.
  * User: dima23
  * Date: 01.10.25
- * Time: 12:31
+ * Time: 12:31.
  */
 
 namespace Database\Seeders;
@@ -30,7 +31,7 @@ class PermissionsAndRolesSeeder extends Seeder
 
         $adminRole = Role::create(['name' => 'admin']);
 
-        /**
+        /*
          * For simplicity, we assign all permissions here.
          * Preferably we do this in AppServiceProvider
          * via Gate::before to give all permissions.

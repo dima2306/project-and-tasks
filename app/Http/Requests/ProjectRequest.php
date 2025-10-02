@@ -4,7 +4,7 @@
  * Created by PhpStorm.
  * User: dima23
  * Date: 30.09.25
- * Time: 00:34
+ * Time: 00:34.
  */
 
 namespace App\Http\Requests;
@@ -51,6 +51,4 @@ class ProjectRequest extends FormRequest
             'is_active' => 'სტატუსი',
         ];
     }
-
-
 }

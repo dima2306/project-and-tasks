@@ -4,7 +4,7 @@
  * Created by PhpStorm.
  * User: dima23
  * Date: 02.10.25
- * Time: 14:34
+ * Time: 14:34.
  */
 
 namespace App\Jobs;
@@ -39,7 +39,7 @@ class SendDailyDigestEmailJob implements ShouldQueue
             Mail::to($this->user->email)
                 ->send(new DailyDigestMail($digestData));
         } else {
-            info('No relevant content for user: '.$this->user->email);
+            info('No relevant content for user: ' . $this->user->email);
         }
     }
 

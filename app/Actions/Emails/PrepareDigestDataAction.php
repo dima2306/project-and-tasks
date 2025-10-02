@@ -4,7 +4,7 @@
  * Created by PhpStorm.
  * User: dima23
  * Date: 02.10.25
- * Time: 14:55
+ * Time: 14:55.
  */
 
 namespace App\Actions\Emails;
@@ -35,7 +35,7 @@ class PrepareDigestDataAction
     {
         return Task::query()
             ->with('project')
-            ->whereHas('project', fn(Builder $q) => $q->where('user_id', $user->id))
+            ->whereHas('project', fn (Builder $q) => $q->where('user_id', $user->id))
             ->whereDate('created_at', $today)
             ->where('status', '<>', 'completed')
             ->get();
@@ -46,7 +46,7 @@ class PrepareDigestDataAction
         return Task::query()
             ->with('project')
             ->whereStatus('completed')
-            ->whereHas('project', fn(Builder $q) => $q->where('user_id', $user->id))
+            ->whereHas('project', fn (Builder $q) => $q->where('user_id', $user->id))
             ->where('created_at', '>=', Carbon::yesterday())
             ->get();
     }

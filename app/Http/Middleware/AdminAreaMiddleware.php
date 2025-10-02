@@ -1,9 +1,10 @@
 <?php
+
 /**
  * Created by PhpStorm.
  * User: dima23
  * Date: 01.10.25
- * Time: 12:59
+ * Time: 12:59.
  */
 
 namespace App\Http\Middleware;

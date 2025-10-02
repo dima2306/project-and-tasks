@@ -1,9 +1,10 @@
 <?php
+
 /**
  * Created by PhpStorm.
  * User: dima23
  * Date: 01.10.25
- * Time: 12:39
+ * Time: 12:39.
  */
 
 namespace Database\Seeders;

@@ -4,7 +4,7 @@
  * Created by PhpStorm.
  * User: dima23
  * Date: 30.09.25
- * Time: 00:34
+ * Time: 00:34.
  */
 
 namespace App\Http\Controllers\Admin;
@@ -26,7 +26,7 @@ class ProjectController extends Controller
         $this->authorize('viewAny', Project::class);
 
         $projects = Cache::tags('projects')
-            ->remember('projects.listing'.auth()->id(), 3600, fn() => Project::all());
+            ->remember('projects.listing' . auth()->id(), 3600, fn () => Project::all());
 
         return view('admin.projects.index', compact('projects'));
     }

@@ -4,7 +4,7 @@
  * Created by PhpStorm.
  * User: dima23
  * Date: 02.10.25
- * Time: 15:00
+ * Time: 15:00.
  */
 
 namespace App\Mail;
@@ -29,7 +29,7 @@ class DailyDigestMail extends Mailable implements ShouldQueue
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'დღიური მიმოხილვა '.$this->digestData['date'],
+            subject: 'დღიური მიმოხილვა ' . $this->digestData['date'],
         );
     }
 

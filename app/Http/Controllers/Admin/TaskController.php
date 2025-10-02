@@ -4,7 +4,7 @@
  * Created by PhpStorm.
  * User: dima23
  * Date: 30.09.25
- * Time: 00:40
+ * Time: 00:40.
  */
 
 namespace App\Http\Controllers\Admin;
@@ -32,7 +32,7 @@ class TaskController extends Controller
         $this->authorize('viewAny', Task::class);
 
         $tasks = Cache::tags('tasks')
-            ->remember('tasks.listing'.auth()->id(), 3600, fn() => Task::all());
+            ->remember('tasks.listing' . auth()->id(), 3600, fn () => Task::all());
 
         return view('admin.tasks.index', compact('tasks'));
     }
