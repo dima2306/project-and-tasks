@@ -60,7 +60,7 @@ class TaskController extends Controller
     {
         $this->authorize('view', $task);
 
-        return $task;
+        return view('admin.tasks.show', compact('task'));
     }
 
     public function edit(Task $task)
