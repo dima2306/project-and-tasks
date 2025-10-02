@@ -76,7 +76,7 @@
     ],
     "lint": "php-cs-fixer fix --dry-run --diff",
     "fix-style": "php-cs-fixer fix",
-    "phpstan": "phpstan analyse",
+    "phpstan": "phpstan analyse --memory-limit=2G",
     "ci": [
       "@lint",
       "@phpstan",
