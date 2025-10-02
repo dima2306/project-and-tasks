@@ -21,6 +21,11 @@ class TaskController extends Controller
 {
     use AuthorizesRequests;
 
+    public const array TASK_STATUSES = [
+        'todo' => 'გასაკეთებელია',
+        'in_progress' => 'მიმდინარეობს',
+    ];
+
     public function index()
     {
         $this->authorize('viewAny', Task::class);
@@ -59,6 +64,17 @@ class TaskController extends Controller
         $this->authorize('view', $task);
 
         return $task;
+    }
+
+    public function edit(Task $task)
+    {
+        $this->authorize('update', $task);
+
+        $data['task'] = $task;
+        $data['projects'] = Project::all();
+        $data['statuses'] = self::TASK_STATUSES;
+
+        return view('admin.tasks.edit', $data);
     }
 
     public function update(TaskRequest $request, Task $task)
