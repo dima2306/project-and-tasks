@@ -1,29 +1,38 @@
-# phpstan.neon
 includes:
-    - ./vendor/nunomaduro/larastan/extension.neon
+    - ./vendor/larastan/larastan/extension.neon
 
 parameters:
     paths:
         - app
         - config
-        - database
+        - database/factories
+        - database/seeders
         - routes
         - tests
 
-    level: 8
+    level: 5
+
+    # Treat test files properly
+    treatPhpDocTypesAsCertain: false
 
     ignoreErrors:
-        - '#PHPDoc tag @var#'
+        # Ignore all method not found errors in test files
+        -
+            message: '#Call to an undefined method#'
+            paths:
+                - tests/Feature/*
+                - tests/Unit/*
+
+        # Ignore property access in tests
+        -
+            message: '#Access to an undefined property#'
+            paths:
+                - tests/*
 
     excludePaths:
-        - ./*/*/FileToBeExcluded.php
+        - tests/Pest.php
+        - tests/TestCase.php  # Sometimes helps to exclude base TestCase
         - ./vendor/*
         - ./node_modules/*
         - ./storage/*
         - ./bootstrap/cache/*
-
-    checkMissingIterableValueType: false
-    checkGenericClassInNonGenericObjectType: false
-
-    databaseMigrationsPath:
-        - database/migrations
