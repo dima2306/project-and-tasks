@@ -40,10 +40,7 @@ class TaskController extends Controller
     public function create()
     {
         $data['projects'] = Project::all();
-        $data['statuses'] = [
-            'todo' => 'გასაკეთებელია',
-            'in_progress' => 'მიმდინარეობს',
-        ];
+        $data['statuses'] = self::TASK_STATUSES;
 
         return view('admin.tasks.create', $data);
     }
