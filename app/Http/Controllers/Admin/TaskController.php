@@ -31,9 +31,8 @@ class TaskController extends Controller
     {
         $this->authorize('viewAny', Task::class);
 
-        $tasks = Cache::tags('tasks')->remember('tasks.listing', 600, function () {
-            return Task::all();
-        });
+        $tasks = Cache::tags('tasks')
+            ->remember('tasks.listing'.auth()->id(), 3600, fn() => Task::all());
 
         return view('admin.tasks.index', compact('tasks'));
     }

@@ -25,9 +25,8 @@ class ProjectController extends Controller
     {
         $this->authorize('viewAny', Project::class);
 
-        $projects = Cache::tags('projects')->remember('projects.listing', 600, function () {
-            return Project::all();
-        });
+        $projects = Cache::tags('projects')
+            ->remember('projects.listing'.auth()->id(), 3600, fn() => Project::all());
 
         return view('admin.projects.index', compact('projects'));
     }
