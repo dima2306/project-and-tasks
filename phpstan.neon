@@ -1,0 +1,29 @@
+# phpstan.neon
+includes:
+    - ./vendor/nunomaduro/larastan/extension.neon
+
+parameters:
+    paths:
+        - app
+        - config
+        - database
+        - routes
+        - tests
+
+    level: 8
+
+    ignoreErrors:
+        - '#PHPDoc tag @var#'
+
+    excludePaths:
+        - ./*/*/FileToBeExcluded.php
+        - ./vendor/*
+        - ./node_modules/*
+        - ./storage/*
+        - ./bootstrap/cache/*
+
+    checkMissingIterableValueType: false
+    checkGenericClassInNonGenericObjectType: false
+
+    databaseMigrationsPath:
+        - database/migrations
