@@ -22,6 +22,11 @@ class Task extends Model
         'title',
         'description',
         'status',
+        'completed_at',
+    ];
+
+    protected $casts = [
+        'completed_at' => 'datetime',
     ];
 
     public function project(): BelongsTo
