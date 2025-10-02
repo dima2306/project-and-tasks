@@ -16,6 +16,7 @@ use App\Models\Task;
 use Cache;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\View\View;
 
 class TaskController extends Controller
 {
@@ -26,7 +27,7 @@ class TaskController extends Controller
         'in_progress' => 'მიმდინარეობს',
     ];
 
-    public function index()
+    public function index(): View
     {
         $this->authorize('viewAny', Task::class);
 
@@ -37,7 +38,7 @@ class TaskController extends Controller
         return view('admin.tasks.index', compact('tasks'));
     }
 
-    public function create()
+    public function create(): View
     {
         $data['projects'] = Project::all();
         $data['statuses'] = self::TASK_STATUSES;
@@ -56,14 +57,14 @@ class TaskController extends Controller
         return back()->with('success', 'დავალება შეიქმნა');
     }
 
-    public function show(Task $task)
+    public function show(Task $task): View
     {
         $this->authorize('view', $task);
 
         return view('admin.tasks.show', compact('task'));
     }
 
-    public function edit(Task $task)
+    public function edit(Task $task): View
     {
         $this->authorize('update', $task);
 
@@ -74,7 +75,7 @@ class TaskController extends Controller
         return view('admin.tasks.edit', $data);
     }
 
-    public function update(TaskRequest $request, Task $task)
+    public function update(TaskRequest $request, Task $task): RedirectResponse
     {
         $this->authorize('update', $task);
 
@@ -85,7 +86,7 @@ class TaskController extends Controller
         return back()->with('success', 'დავალება განახლდა');
     }
 
-    public function destroy(Task $task)
+    public function destroy(Task $task): RedirectResponse
     {
         $this->authorize('delete', $task);
 
