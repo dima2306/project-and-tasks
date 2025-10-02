@@ -121,13 +121,81 @@
                 </div>
             </div>
 
-            <div class="bg-gray-50 px-6 py-4 border-t">
+            <div class="flex justify-between bg-gray-50 px-6 py-4 border-t ">
                 <a href="{{ route('admin.tasks.index') }}"
                    class="inline-flex items-center px-4 py-2 bg-gray-600 text-white rounded-md hover:bg-gray-700">
                     <x-icon-arrow-left class="size-4 mr-1" />
                     უკან დაბრუნება
                 </a>
+                @if($task->status !== 'completed')
+                    @can('update', $task)
+                        <button title="აღნიშნული დავალების დასრულებულად მონიშვნა" role="link"
+                                id="complete-task-button" data-task-id="{{ $task->id }}"
+                                class="inline-flex px-4 py-2 text-white rounded-md bg-green-600 hover:bg-green-700 hover:cursor-pointer">
+                            <x-icon-check class="size-5 mr-2" />
+                            <span id="complete-button-text">დასრულება</span>
+                        </button>
+                    @endcan
+                @endif
             </div>
         </div>
     </div>
 @endsection
+
+@push('scripts')
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const button = document.querySelector('#complete-task-button');
+
+            if (button) {
+                button.addEventListener('click', function() {
+                    const button = this;
+                    const buttonText = document.querySelector('#complete-button-text');
+                    const taskId = this.dataset.taskId;
+
+                    button.disabled = true;
+                    buttonText.textContent = 'მუშავდება...';
+
+                    fetch(`/api/tasks/${taskId}/completed`, {
+                        method: 'PATCH',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Accept': 'application/json',
+                            'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                        }
+                    })
+                        .then(res => res.json())
+                        .then(data => {
+                            if (data.success) {
+                                const statusSpan = document.querySelector('[class*="bg-yellow-100"], [class*="bg-blue-100"], [class*="bg-green-100"]');
+
+                                if (statusSpan) {
+                                    statusSpan.textContent = 'დასრულებული';
+                                    statusSpan.className = 'mt-1 inline-block px-3 py-1 rounded-full text-sm font-medium bg-green-100 text-green-800';
+                                }
+
+                                button.outerHTML = `
+                                    <span class="inline-flex px-4 py-2 text-green-700 bg-green-100 rounded-md">
+                                        <x-icon-check class="size-5 mr-2" />
+                                        დასრულებული
+                                    </span>
+                                `;
+                            } else {
+                                alert(data.message || 'დაფიქსირდა შეცდომა. გთხოვთ სცადოთ თავიდან.');
+
+                                button.disabled = false;
+                                buttonText.textContent = 'დასრულება';
+                            }
+                        })
+                        .catch(error => {
+                            console.log('Error:', error);
+                            alert('დაფიქსირდა შეცდომა. გთხოვთ სცადოთ თავიდან.');
+
+                            button.disabled = false;
+                            buttonText.textContent = 'დასრულება';
+                        });
+                });
+            }
+        });
+    </script>
+@endpush

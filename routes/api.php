@@ -1,8 +1,11 @@
 <?php
 
-use Illuminate\Http\Request;
+use App\Http\Api\TaskController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/user', function (Request $request) {
-    return $request->user();
-})->middleware('auth:sanctum');
+Route::middleware(['web', 'auth:sanctum'])
+    ->name('api.')
+    ->group(function () {
+        Route::patch('tasks/{task}/completed', TaskController::class)
+            ->name('tasks.completed');
+    });
