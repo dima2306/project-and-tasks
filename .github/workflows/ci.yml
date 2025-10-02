@@ -1,0 +1,28 @@
+name: CI Pipeline
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  lint:
+    name: Code Style
+    uses: './.github/workflows/lint.yml'
+    secrets: inherit
+
+  phpstan:
+    name: Static Analysis
+    needs: lint
+    uses: './.github/workflows/phpstan.yml'
+    secrets: inherit
+
+  tests:
+    name: Tests
+    needs: phpstan
+    uses: './.github/workflows/tests.yml'
+    with:
+      php-version: '8.4'
+      node-version: '22'
+      coverage-threshold: 80
