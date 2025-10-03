@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Validation\ValidationException;
 use Inertia\Inertia;
 use Inertia\Response;
@@ -31,11 +32,25 @@ class AuthController extends Controller
             'password' => 'required',
         ]);
 
+        $key = $request->email . '|' . $request->ip();
+
+        if (RateLimiter::tooManyAttempts($key, 5)) {
+            $seconds = RateLimiter::availableIn($key);
+            throw ValidationException::withMessages([
+                'email' => "Too many login attempts. Please try again in {$seconds} seconds.",
+            ]);
+        }
+
         if (!Auth::attempt($request->only('email', 'password'), $request->boolean('remember'))) {
+            // Increment the rate limiter on failed attempts
+            RateLimiter::hit($key);
+
             throw ValidationException::withMessages([
                 'email' => __('These credentials do not match our records.'),
             ]);
         }
+
+        RateLimiter::clear($key);
 
         $request->session()->regenerate();
 
@@ -87,6 +102,6 @@ class AuthController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return redirect()->route('login');
+        return redirect()->route('home');
     }
 }
