@@ -17,10 +17,7 @@ class MarkTaskAsCompletedAction
 {
     public function execute(Task $task): JsonResponse|RedirectResponse
     {
-        $task->update([
-            'status' => 'completed',
-            'completed_at' => now(),
-        ]);
+        $task->markCompleted();
 
         if (request()->expectsJson()) {
             return response()->json([
