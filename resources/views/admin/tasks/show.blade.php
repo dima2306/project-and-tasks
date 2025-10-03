@@ -60,7 +60,7 @@
                                         bg-gray-100 text-gray-800
                                     @endif">
                                     {{-- Here we are using table-lookup for fast array scan and  better readability --}}
-                                    {{ $taskStatuses[$task->status] ?? 'უცნობი' }}
+                                    {{ $taskStatuses[$task->status->value] ?? 'უცნობი' }}
                                 </span>
                             </div>
 
