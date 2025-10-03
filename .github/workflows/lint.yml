@@ -3,8 +3,8 @@ name: linter
 on:
   workflow_call:
 
-permissions:
-  contents: write
+# permissions:
+#   contents: write
 
 jobs:
   quality:
