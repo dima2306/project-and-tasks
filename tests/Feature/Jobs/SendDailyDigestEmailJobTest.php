@@ -32,7 +32,6 @@ describe('SendDailyDigestEmailJob', function () {
                 // Use reflection to access private property
                 $reflection = new ReflectionClass($job);
                 $userProperty = $reflection->getProperty('user');
-                $userProperty->setAccessible(true);
                 $jobUser = $userProperty->getValue($job);
 
                 return $jobUser->id === $this->user->id;
@@ -48,7 +47,6 @@ describe('SendDailyDigestEmailJob', function () {
             // Use reflection to access private property for verification
             $reflection = new ReflectionClass($unserialized);
             $userProperty = $reflection->getProperty('user');
-            $userProperty->setAccessible(true);
             $jobUser = $userProperty->getValue($unserialized);
 
             expect($jobUser->id)->toBe($this->user->id);
@@ -141,7 +139,6 @@ describe('SendDailyDigestEmailJob', function () {
             // Use reflection to test private method
             $reflection = new ReflectionClass($job);
             $method = $reflection->getMethod('hasRelevantContent');
-            $method->setAccessible(true);
 
             $hasContent = $method->invoke($job, $digestData);
 
@@ -158,7 +155,6 @@ describe('SendDailyDigestEmailJob', function () {
             // Use reflection to test private method
             $reflection = new ReflectionClass($job);
             $method = $reflection->getMethod('hasRelevantContent');
-            $method->setAccessible(true);
 
             $hasContent = $method->invoke($job, $digestData);
 
