@@ -76,7 +76,7 @@ describe('TaskStatus Enum', function () {
         });
 
         it('throws exception for invalid enum value', function () {
-            expect(fn() => TaskStatus::from('invalid'))->toThrow(ValueError::class);
+            expect(fn () => TaskStatus::from('invalid'))->toThrow(ValueError::class);
         });
 
         it('returns null for invalid value with tryFrom', function () {

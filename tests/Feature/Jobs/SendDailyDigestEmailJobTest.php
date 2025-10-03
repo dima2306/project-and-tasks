@@ -34,7 +34,7 @@ describe('SendDailyDigestEmailJob', function () {
                 $userProperty = $reflection->getProperty('user');
                 $userProperty->setAccessible(true);
                 $jobUser = $userProperty->getValue($job);
-                
+
                 return $jobUser->id === $this->user->id;
             });
         });

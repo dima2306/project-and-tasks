@@ -4,7 +4,6 @@ use App\Enums\TaskStatus;
 use App\Models\Project;
 use App\Models\Task;
 use App\Models\User;
-use Carbon\Carbon;
 
 beforeEach(function () {
     $this->user = User::factory()->create();
@@ -119,8 +118,8 @@ describe('TaskStatus Integration', function () {
         it('filters using enum methods in collections', function () {
             $allTasks = Task::all();
 
-            $activeTasks = $allTasks->filter(fn($task) => $task->status->isActive());
-            $completedTasks = $allTasks->filter(fn($task) => $task->status->isCompleted());
+            $activeTasks = $allTasks->filter(fn ($task) => $task->status->isActive());
+            $completedTasks = $allTasks->filter(fn ($task) => $task->status->isCompleted());
 
             expect($activeTasks)->toHaveCount(5);
             expect($completedTasks)->toHaveCount(4);
