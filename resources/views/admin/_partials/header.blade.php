@@ -21,7 +21,7 @@
         <!-- User Profile Dropdown -->
         <div class="relative" x-data="{ open: false }">
             <button @click="open = !open" @keydown.escape="open = false" type="button"
-                    class="flex items-center focus:outline-none focus:ring-2 focus:ring-indigo-500 rounded-full"
+                    class="flex items-center focus:outline-none focus:ring-2 focus:ring-indigo-500 rounded-full hover:cursor-pointer"
                     id="user-menu-button" aria-expanded="false" aria-haspopup="true">
                 <img class="h-10 w-10 rounded-full object-cover" src="https://i.pravatar.cc/40" alt="User avatar" />
             </button>
@@ -42,8 +42,9 @@
                  tabindex="-1"
             >
                 <form method="POST" action="/logout">
+                    @csrf
                     <button type="submit"
-                            class="w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-600"
+                            class="w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 hover:cursor-pointer dark:hover:bg-gray-600"
                             role="menuitem" tabindex="-1">
                         გასვლა
                     </button>
