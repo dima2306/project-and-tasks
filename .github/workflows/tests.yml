@@ -62,7 +62,9 @@ jobs:
           key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
 
       - name: Install Dependencies
-        run: composer install --no-interaction --prefer-dist --optimize-autoloader
+        run: |
+          composer install --no-interaction --prefer-dist --optimize-autoloader
+          npm run build
 
       - name: Setup Laravel
         run: |
