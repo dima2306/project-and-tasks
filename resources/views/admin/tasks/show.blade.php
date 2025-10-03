@@ -2,10 +2,10 @@
 
 @section('content')
     <div class="container mx-auto px-4 py-6">
-        <div class="bg-white shadow-lg rounded-lg overflow-hidden">
-            <div class="bg-gray-50 px-6 py-4 border-b">
+        <div class="bg-white shadow-lg rounded-lg overflow-hidden dark:bg-gray-800">
+            <div class="bg-gray-50 px-6 py-4 border-b dark:bg-gray-800">
                 <div class="flex justify-between items-center">
-                    <h1 class="text-2xl font-bold text-gray-800">დავალების დეტალები</h1>
+                    <h1 class="text-2xl font-bold text-gray-800 dark:text-white">დავალების დეტალები</h1>
                     <div class="flex space-x-2">
                         @can('update', $task)
                             <a href="{{ route('admin.tasks.edit', $task->id) }}"
@@ -35,20 +35,20 @@
             <div class="px-6 py-6">
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
-                        <h3 class="text-lg font-semibold text-gray-700 mb-4">დავალების ინფორმაცია</h3>
+                        <h3 class="text-lg font-semibold text-gray-700 mb-4 dark:text-white">დავალების ინფორმაცია</h3>
                         <div class="space-y-4">
                             <div>
-                                <label class="block text-sm font-medium text-gray-600">დასახელება</label>
-                                <p class="mt-1 text-lg text-gray-900">{{ $task->title }}</p>
+                                <label class="block text-sm font-medium text-gray-600 dark:text-white">დასახელება</label>
+                                <p class="mt-1 text-lg text-gray-900 dark:text-white">{{ $task->title }}</p>
                             </div>
 
                             <div>
-                                <label class="block text-sm font-medium text-gray-600">აღწერა</label>
-                                <p class="mt-1 text-gray-800 whitespace-pre-line">{{ $task->description }}</p>
+                                <label class="block text-sm font-medium text-gray-600 dark:text-white">აღწერა</label>
+                                <p class="mt-1 text-gray-800 whitespace-pre-line dark:text-white">{{ $task->description }}</p>
                             </div>
 
                             <div>
-                                <label class="block text-sm font-medium text-gray-600">სტატუსი</label>
+                                <label class="block text-sm font-medium text-gray-600 dark:text-white">სტატუსი</label>
                                 <span class="mt-1 inline-block px-3 py-1 rounded-full text-sm font-medium
                                     @if($task->status === 'todo')
                                         bg-yellow-100 text-yellow-800
@@ -65,45 +65,51 @@
                             </div>
 
                             <div>
-                                <label class="block text-sm font-medium text-gray-600">შექმნის თარიღი</label>
-                                <p class="mt-1 text-gray-800">{{ $task->created_at->format('d.m.Y H:i') }}</p>
+                                <label class="block text-sm font-medium text-gray-600 dark:text-white">შექმნის თარიღი</label>
+                                <p class="mt-1 text-gray-800 dark:text-white">{{ $task->created_at->format('d.m.Y H:i') }}</p>
                             </div>
 
                             @if($task->updated_at != $task->created_at)
                                 <div>
-                                    <label class="block text-sm font-medium text-gray-600">ბოლო განახლება</label>
-                                    <p class="mt-1 text-gray-800">{{ $task->updated_at->format('d.m.Y H:i') }}</p>
+                                    <label class="block text-sm font-medium text-gray-600 dark:text-white">ბოლო განახლება</label>
+                                    <p class="mt-1 text-gray-800 dark:text-white">{{ $task->updated_at->format('d.m.Y H:i') }}</p>
                                 </div>
                             @endif
                         </div>
                     </div>
 
                     <div>
-                        <h3 class="text-lg font-semibold text-gray-700 mb-4">დაკავშირებული პროექტი</h3>
-                        <div class="bg-gray-50 rounded-lg p-4">
+                        <h3 class="text-lg font-semibold text-gray-700 mb-4 dark:text-white">დაკავშირებული პროექტი</h3>
+                        <div class="bg-gray-50 rounded-lg p-4 dark:bg-gray-700">
                             <div class="space-y-3">
                                 <div>
-                                    <label class="block text-sm font-medium text-gray-600">პროექტის სახელი</label>
+                                    <label class="block text-sm font-medium text-gray-600 dark:text-white">პროექტის სახელი</label>
                                     @can('view', $task->project)
                                         <a href="{{ route('admin.projects.show', $task->project->id) }}"
                                            class="mt-1 text-lg text-blue-600 hover:text-blue-800 hover:underline">
                                             {{ $task->project->name }}
                                         </a>
                                     @else
-                                        <p class="mt-1 text-lg text-gray-900">{{ $task->project->name }}</p>
+                                        <p class="mt-1 text-lg text-gray-900 dark:text-white">{{ $task->project->name }}</p>
                                     @endcan
                                 </div>
 
                                 @if($task->project->description)
                                     <div>
-                                        <label class="block text-sm font-medium text-gray-600">პროექტის აღწერა</label>
-                                        <p class="mt-1 text-gray-700 text-sm">{{ Str::limit($task->project->description, 150) }}</p>
+                                        <label class="block text-sm font-medium text-gray-600 dark:text-white">
+                                            პროექტის აღწერა
+                                        </label>
+                                        <p class="mt-1 text-gray-700 text-sm dark:text-white">
+                                            {{ Str::limit($task->project->description, 150) }}
+                                        </p>
                                     </div>
                                 @endif
 
                                 <div>
-                                    <label class="block text-sm font-medium text-gray-600">პროექტის მფლობელი</label>
-                                    <p class="mt-1 text-gray-800">{{ $task->project->user->name }}</p>
+                                    <label class="block text-sm font-medium text-gray-600 dark:text-white">
+                                        პროექტის მფლობელი
+                                    </label>
+                                    <p class="mt-1 text-gray-800 dark:text-white">{{ $task->project->user->name }}</p>
                                 </div>
 
                                 <div class="pt-2">
@@ -121,7 +127,7 @@
                 </div>
             </div>
 
-            <div class="flex justify-between bg-gray-50 px-6 py-4 border-t ">
+            <div class="flex justify-between bg-gray-50 px-6 py-4 border-t dark:bg-gray-800">
                 <a href="{{ route('admin.tasks.index') }}"
                    class="inline-flex items-center px-4 py-2 bg-gray-600 text-white rounded-md hover:bg-gray-700">
                     <x-icon-arrow-left class="size-4 mr-1" />
