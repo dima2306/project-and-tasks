@@ -23,7 +23,7 @@ class CheckSanctumTokenExpiration
                 $token->delete();
 
                 return response()->json([
-                    'message' => 'Token has expired.'
+                    'message' => 'Token has expired.',
                 ], 401);
             }
         }
