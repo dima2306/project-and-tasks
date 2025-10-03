@@ -37,7 +37,7 @@ seed:
 	@echo "✅ Seeding completed!"
 
 test:
-	$(DOCKER_EXEC) php artisan test --parallel
+	$(DOCKER_EXEC) php artisan test
 	@echo "✅ Tests completed!"
 
 # Configure environment - create .env if needed and generate key
