@@ -21,7 +21,6 @@ parameters:
             message: '#Call to an undefined method#'
             paths:
                 - tests/Feature/*
-                - tests/Unit/*
 
         # Ignore property access in tests
         -
